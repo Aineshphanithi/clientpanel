@@ -8,6 +8,8 @@ import Dashboard from './components/layout/Dashboard';
 import AddClient from './components/clients/AddClient';
 import EditClient from './components/clients/EditClient';
 import ClientDetails from './components/clients/ClientDetails';
+import Login from './components/auth/Login';
+import { UserIsAuthenticated,UserIsNotAuthenticated } from './helpers/auth'
 
 class App extends React.Component{
   render(){
@@ -18,10 +20,11 @@ class App extends React.Component{
         <AppNavbar />
         <div className="container">
           <Switch>
-            <Route exact path="/" component={ Dashboard } />
-            <Route exact path="/client/add" component={AddClient} />
-            <Route exact path="/client/edit/:id" component={EditClient} />
-            <Route exact path="/client/:id" component={ClientDetails} />
+            <Route exact path="/" component={ UserIsAuthenticated(Dashboard) } />
+            <Route exact path="/client/add" component={UserIsAuthenticated(AddClient)} />
+            <Route exact path="/client/edit/:id" component={UserIsAuthenticated(EditClient)} />
+            <Route exact path="/client/:id" component={UserIsAuthenticated(ClientDetails)} />
+            <Route exact path="/login" component={UserIsNotAuthenticated(Login)} />
           </Switch>
         </div>
       </div>
